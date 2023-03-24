@@ -5,7 +5,7 @@ This playground allows you to experiment with the concepts explained in my post 
 
 1. Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
 2. Clone this repository.
-3. Run `make xxx` to start the Nginx and PHP-FPM containers, where "xxx" is one of the process manager strategies explained in the post.
+3. Run `make xxx` to start the Nginx and PHP-FPM containers, where "xxx" is one of the process manager strategies explained in the post (static, dynamic or ondemand).
 4. Visit `http://localhost:8080/` and the message "PHP script completed" should be displayed.
 
 ## Configuration
