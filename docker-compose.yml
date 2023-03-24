@@ -1,0 +1,39 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    mem_limit: 128m
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - nginx_socket:/var/run/
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    image: php:fpm
+    mem_limit: ${PHPFPM_CONTAINER_MEM_LIMIT}
+    container_name: php-fpm
+    volumes:
+      - ./php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./php.ini:/usr/local/etc/php/php.ini
+      - .:/var/www/html
+      - php_socket:/var/run/
+    environment:
+      PM_STRATEGY: ${PM_STRATEGY}
+      PM_MAX_CHILDREN: ${PM_MAX_CHILDREN}
+      PM_MAX_REQUESTS: ${PM_MAX_REQUESTS}
+      PM_REQUEST_TERMINATE_TIMEOUT: ${PM_REQUEST_TERMINATE_TIMEOUT}
+      PHP_MEM_USED_IN_MB: ${PHP_MEM_USED_IN_MB}
+      PHP_EXECUTION_TIME_IN_SECONDS: ${PHP_EXECUTION_TIME_IN_SECONDS}
+      PM_CHILDREN_MEMORY_LIMIT: ${PM_CHILDREN_MEMORY_LIMIT}
+      PM_START_SERVERS: ${PM_START_SERVERS}
+      PM_MIN_SPARE_SERVERS: ${PM_MIN_SPARE_SERVERS}
+      PM_MAX_SPARE_SERVERS: ${PM_MAX_SPARE_SERVERS}
+      PM_PROCESS_IDLE_TIMEOUT: ${PM_PROCESS_IDLE_TIMEOUT}
+
+volumes:
+  nginx_socket:
+  php_socket:
