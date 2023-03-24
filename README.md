@@ -30,7 +30,7 @@ To modify the settings of PHP-FPM and Nginx, edit the `scenarios-config/.env.xxx
 
 ## Load Testing
 In order to see how your architecture behaves in a concurrent environment you need to send multiple HTTP requests in parallel. There are different tools in the market for this purpose. You can use `ab` (Apache HTTP server benchmarking tool) to easily send batches of concurrent requests up to a total limit:
-`ab -n 500 -c 100 http://localhost:8080/index.php`
+```ab -n 500 -c 100 http://localhost:8080/index.php```
 In the previous example, you are sending batches of 100 simultaneous requests up to 500 requests in total.
 
 ## New Testing Scenarios
@@ -42,7 +42,9 @@ You can create many configurations for different scenarios in the `scenarios-con
 xxx:
 	docker-compose --env-file scenarios-config/.env.xxx up
 ```
-4. Run `Makefile xxx` to restart Nginx and PHP-FPM with the new config.
+4. Run `make xxx` to restart Nginx and PHP-FPM with the new config.
 
 ## Monitoring
 When your containers are up and running, you can visit the built-in status pages provided by Nginx (http://localhost:8080/stub_status) and PHP-FPM (http://localhost:8080/status) to check out their health and performance.
+
+Also, you can monitor the resources usage of the PHP-FPM and Nginx containers by running `docker stats php-fpm` and `docker stats nginx` respectively.
