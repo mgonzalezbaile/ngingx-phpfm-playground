@@ -30,7 +30,9 @@ To modify the settings of PHP-FPM and Nginx, edit the `scenarios-config/.env.xxx
 
 ## Load Testing
 In order to see how your architecture behaves in a concurrent environment you need to send multiple HTTP requests in parallel. There are different tools in the market for this purpose. You can use `ab` (Apache HTTP server benchmarking tool) to easily send batches of concurrent requests up to a total limit:
-```ab -n 500 -c 100 http://localhost:8080/index.php```
+```
+ab -n 500 -c 100 http://localhost:8080/index.php
+```
 In the previous example, you are sending batches of 100 simultaneous requests up to 500 requests in total.
 
 ## New Testing Scenarios
